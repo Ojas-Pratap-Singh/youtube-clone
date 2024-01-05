@@ -6,6 +6,15 @@ const CONTENT_DEATILS = "contentDetails"; // give length of vide
 const STATS = "statistics"; // give live , no of comment , views count of video
 const videoImg = document.querySelector(".thumbnail");
 const videoContainer = document.querySelector(".video-wrapper");
+const inputQuery = document.querySelector("input");
+const button = document.querySelector("button");
+
+button.addEventListener("click", () => {
+  let searchQuery = inputQuery.value;
+  videoContainer.innerHTML = "";
+  fetchVideo(searchQuery, 20);
+});
+
 async function fetchVideo(searchQuery, maxResults) {
   try {
     const response = await fetch(
@@ -14,7 +23,10 @@ async function fetchVideo(searchQuery, maxResults) {
         `?key=${API_KEY}` +
         "&part=snippet" +
         `&q=${searchQuery}` +
-        `&maxResults=${maxResults}`
+        `&maxResults=${maxResults}`+
+        "&type=video"+
+        "&chart=mostPopular"+
+        "$videoEmbeddable=true"        
     ); // this will give response object
     // snippet give additional information about vide like channel detail i.e its channelID , channel titile etc.
     const data = await response.json();
@@ -35,7 +47,7 @@ async function renderVideo(items) {
     // console.log(channelId);
     let channelurl = await fetchChannelLogo(channelId);
 
-      console.log(channelurl);
+    // console.log(channelurl);
 
     let videoCard = document.createElement("div");
     videoCard.className = "video";
@@ -53,6 +65,19 @@ async function renderVideo(items) {
   </div>
 </div>
   `;
+    //adding click event to all video card
+
+    videoCard.addEventListener("click", () => {
+      //retrieving video id from video item
+      let videoId = video.id.videoId;
+      console.log("video id= ",videoId);
+      //storing vide id in localStroage
+      localStorage.setItem("selectedVideoId", videoId);
+
+      //redirecting to video player html page
+      window.location.href = "http://127.0.0.1:5500/videoPlayer.html";
+    });
+
     videoContainer.append(videoCard);
   });
 }
@@ -113,3 +138,6 @@ async function getComments(videoIdId) {
 // fetchVideo("", 30);
 // fetchVideoStats("ng438SIXyW4",STATS);
 // fetchChannelLogo("UCJrpiw6dS09Zx2Z8d9AFWDA");
+//search query
+//comment
+//views in video card

@@ -4,9 +4,51 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Document</title>
+    <link rel="stylesheet" href="style.css">
+    <link
+    href="https://cdn.jsdelivr.net/npm/remixicon@4.0.0/fonts/remixicon.css"
+    rel="stylesheet"
+  />
+  <link rel="stylesheet" href="videoPlayer.css">
 </head>
 <body>
-    <div id="video-player"></div>
+    <!-- nav bar -->
+    <header>
+        <div class="col-1">
+          <i class="ri-menu-line"></i>
+          <img src="assets/899_youtube_2017logo.jpg" width="50" height=" 30px;" />
+        </div>
+        <div class="col-2">
+          <div>
+            <input type="text" placeholder="Search" />
+            <button><i class="ri-search-line"></i></button>
+          </div>
+  
+          <i class="ri-mic-line"></i>
+        </div>
+        <div class="col-3">
+          <i class="ri-vidicon-line"></i>
+          <i class="ri-apps-2-line"></i>
+          <i class="ri-notification-line"></i>
+          <i class="ri-user-line"></i>
+        </div>
+      </header>
+
+       <!-- wrapper -->
+    <section class="wrapper">
+        <div class="sidebar">
+         
+        </div>
+        <div id="video-player">
+
+        </div>
+        <!-- side video recommendation -->
+        <div class="sideRecom">
+
+        </div>
+      </section>
+
+   
     <!-- cdn link -->
     <script src="https://www.youtube.com/iframe_api"></script>
     <script src="videoPlayer.js"></script>

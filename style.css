@@ -55,6 +55,7 @@ input {
   background: transparent;
   color: white;
   border: 1px solid #303131;
+  outline: none;
   background-color: #131213;
   height: 35px;
   border-radius: 17px 0px 0px 17px;
@@ -100,6 +101,10 @@ hr {
 }
 .content {
   width: calc((100vw) - 240px);
+  background-color: black;
+  overflow-y: scroll;
+
+
 }
 .tag-line {
   overflow-x: scroll;
@@ -112,25 +117,29 @@ hr {
   padding: 6px 20px;
   border-radius: 12px;
   color: white;
+  display: flex;
+  justify-content: center;
+  align-items: center;
 }
 .video-wrapper {
-  height: 721px;
+  /* height:91.5%; */
   display: grid;
   grid-template-columns: repeat(4, 1fr);
   gap: 26px 23px;
-  padding: 20px 25px;
+  /* padding: 20px 25px; */
   overflow-y: scroll;
-  background-color: #131213;
+  /* background-color: #131213; */
+  margin: 12px 22px;
 }
 .video {
   position: relative;
   transition: 0.2s;
   transition-delay: 0.2s;
   height: 400px;
-  border: transparent;
+  border: 2px solid #131213;
   border-radius: 10px;
   overflow: hidden;
-  background: black;
+  /* background: #131213; */
 }
 .video-content {
   position: relative;
