@@ -1,56 +1,74 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Document</title>
-    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="style.css" />
     <link
-    href="https://cdn.jsdelivr.net/npm/remixicon@4.0.0/fonts/remixicon.css"
-    rel="stylesheet"
-  />
-  <link rel="stylesheet" href="videoPlayer.css">
-</head>
-<body>
+      href="https://cdn.jsdelivr.net/npm/remixicon@4.0.0/fonts/remixicon.css"
+      rel="stylesheet"
+    />
+    <link rel="stylesheet" href="videoPlayer.css" />
+  </head>
+  <body>
     <!-- nav bar -->
     <header>
-        <div class="col-1">
-          <i class="ri-menu-line"></i>
-          <img src="assets/899_youtube_2017logo.jpg" width="50" height=" 30px;" />
+      <div class="col-1">
+        <i class="ri-menu-line"></i>
+        <img src="assets/899_youtube_2017logo.jpg" width="50" height=" 30px;" />
+      </div>
+      <div class="col-2">
+        <div>
+          <input type="text" placeholder="Search" />
+          <button><i class="ri-search-line"></i></button>
         </div>
-        <div class="col-2">
-          <div>
-            <input type="text" placeholder="Search" />
-            <button><i class="ri-search-line"></i></button>
-          </div>
-  
-          <i class="ri-mic-line"></i>
-        </div>
-        <div class="col-3">
-          <i class="ri-vidicon-line"></i>
-          <i class="ri-apps-2-line"></i>
-          <i class="ri-notification-line"></i>
-          <i class="ri-user-line"></i>
-        </div>
-      </header>
 
-       <!-- wrapper -->
+        <i class="ri-mic-line"></i>
+      </div>
+      <div class="col-3">
+        <i class="ri-vidicon-line"></i>
+        <i class="ri-apps-2-line"></i>
+        <i class="ri-notification-line"></i>
+        <i class="ri-user-line"></i>
+      </div>
+    </header>
+
+    <!-- wrapper -->
     <section class="wrapper">
-        <div class="sidebar">
-         
-        </div>
-        <div id="video-player">
+      <div class="sidebar"></div>
 
+      <div class="vid">
+        <div id="video-player"></div>
+      <div class="det">
+        <!-- video player HTML structure -->
+        <div class="video-details-container">
+          <h1 class="video-title"></h1>
+          <div class="video-like-share">
+            <span class="video-like"
+              ><i class="ri-thumb-up-line"></i> <span class="like-count"></span
+            ></span>
+            <span class="video-share"
+              ><i class="ri-share-line"></i> <span class="share-count"></span
+            ></span>
+          </div>
+          <p class="video-description"></p>
         </div>
-        <!-- side video recommendation -->
-        <div class="sideRecom">
 
+        <!-- comments section -->
+        <div class="comments-container">
+          <h2>Comments</h2>
+          <ul class="comments-list"></ul>
         </div>
-      </section>
+      </div>
+      </div>
 
-   
+      <!-- side video recommendation -->
+      <div class="sideRecom"></div>
+    </section>
+
     <!-- cdn link -->
     <script src="https://www.youtube.com/iframe_api"></script>
     <script src="videoPlayer.js"></script>
-</body>
+  </body>
 </html>

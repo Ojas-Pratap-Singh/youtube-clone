@@ -1,6 +1,13 @@
 function onPlayerReady(event) {
   event.target.playVideo();
+  
 }
+function showReplies(commentId) {
+  // Fetch and display replies when the "Show Replies" button is clicked
+  console.log("show replies fucntion");
+  fetchReplies(commentId);
+}
+
 const BASE_URL = "https://www.googleapis.com/youtube/v3";
 
 const API_KEY = "AIzaSyDhhLy6XkdJf-3PC978OBGRTay--n8ttmQ";
@@ -13,22 +20,26 @@ window.addEventListener("load", () => {
   // here we have to render my video logic
 
   // Retrieve the video ID from local storage
-  const storedVideoId = localStorage.getItem("selectedVideoId");
-
+  let storedVideoId = localStorage.getItem("selectedVideoId");
+ storedVideoId  = "ApXoWvfEYVU";
   console.log("storeagevideoid = ", storedVideoId);
   // if (storedVideoId) {
     // Call your API with the retrieved video ID
-    // let videoId = "FCQn1UVmfoo";
+     let videoId = "ApXoWvfEYVU";
     if (YT) {
       new YT.Player("video-player", {
-        height: "50%",
-        width: "60%",
-        videoId:storedVideoId,
+        height: "100%",
+        width: "100%",
+          videoId:storedVideoId,
         events: {
           onReady: onPlayerReady,
         },
       });
     }
+     // Fetch video details when the player is ready
+   fetchVideoDetails(storedVideoId);
+   // Fetch comments for the video
+   fetchComments(storedVideoId);
     // fetchVideoDetails(storedVideoId);
   // } else {
   //   console.error("No video ID found in local storage");
@@ -133,7 +144,115 @@ window.addEventListener("load", () => {
       console.log(err);
     }
   }
+  async function getComments(videoIdId) {
+    try {
+      const response = await fetch(
+        BASE_URL +
+          "/commentThreads" +
+          `?key=${API_KEY}` +
+          `&videoId=${videoIdId}` +
+          `&maxResults=25&part=snippet`
+      );
+      const data = await response.json(); // this will give data promise
+      console.log(data);
+    } catch (err) {
+      console.log(err);
+    }
+  }
 
-  fetchVideo("",5);
+
+
+
+
+
+  fetchVideo("",10);
+
+
+
+  //
+  async function fetchVideoDetails(videoId) {
+    try {
+      const response = await fetch(
+        `${BASE_URL}/videos?key=${API_KEY}&part=snippet,statistics&id=${videoId}`
+      );
+      const data = await response.json();
+      const videoDetails = data.items[0].snippet;
+      const vd = data.items[0];
+      
+      // Update video details on the page
+      document.querySelector('.video-title').textContent = videoDetails.title;
+      document.querySelector('.like-count').textContent = vd.likeCount;
+      document.querySelector('.share-count').textContent = vd.shareCount;
+      document.querySelector('.video-description').textContent = videoDetails.description;
+    } catch (err) {
+      console.error("Error fetching video details:", err);
+    }
+  }
+  
+  async function fetchComments(videoId) {
+    try {
+      const response = await fetch(
+        `${BASE_URL}/commentThreads?key=${API_KEY}&videoId=${videoId}&maxResults=10&part=snippet`
+      );
+      const data = await response.json();
+      
+      // Update the comments on the page
+      console.log(data);
+      renderComments(data.items);
+    } catch (err) {
+      console.error("Error fetching comments:", err);
+    }
+  }
+  
+  function renderComments(comments) {
+    const commentsList = document.querySelector('.comments-list');
+    comments.forEach(comment => {
+      const commentItem = document.createElement('li');
+      commentItem.innerHTML = `
+        <div class="comment-details">
+          <span class="comment-author">${comment.snippet.topLevelComment.snippet.authorDisplayName}</span>
+          <p class="comment-text">${comment.snippet.topLevelComment.snippet.textDisplay}</p>
+          <button class="show-replies-btn" data-comment-id="${comment.id}" onclick="showReplies('${comment.id}')">Show Replies</button>
+        </div>
+        <ul class="replies-list" id="replies-${comment.id}"></ul>
+      `;
+      commentsList.appendChild(commentItem);
+    });
+  }
+  
+ 
+
+  
 
 });
+async function fetchReplies(parentCommentId) {
+  try {
+    const response = await fetch(
+      `${BASE_URL}/comments?key=${API_KEY}&parentId=${parentCommentId}&maxResults=5&part=snippet`
+    );
+    const data = await response.json();
+    
+    // Update and display the replies on the page
+    console.log("fetch replies fucntion" , data);
+
+    renderReplies(parentCommentId, data.items);
+  } catch (err) {
+    console.error("Error fetching replies:", err);
+  }
+}
+function renderReplies(parentCommentId, replies) {
+  const repliesList = document.getElementById(`replies-${parentCommentId}`);
+  replies.forEach(reply => {
+    const replyItem = document.createElement('li');
+    replyItem.innerHTML = `
+      <div class="reply-details">
+        <span class="reply-author">${reply.snippet.authorDisplayName}</span>
+        <p class="reply-text">${reply.snippet.textDisplay}</p>
+      </div>
+    `;
+    console.log("render replies fucntion");
+
+    console.log(replyItem);
+    repliesList.appendChild(replyItem);
+  });
+}
