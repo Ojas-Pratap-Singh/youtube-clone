@@ -1,6 +1,5 @@
 function onPlayerReady(event) {
   event.target.playVideo();
-  
 }
 function showReplies(commentId) {
   // Fetch and display replies when the "Show Replies" button is clicked
@@ -21,32 +20,30 @@ window.addEventListener("load", () => {
 
   // Retrieve the video ID from local storage
   let storedVideoId = localStorage.getItem("selectedVideoId");
- storedVideoId  = "ApXoWvfEYVU";
+  //  storedVideoId  = "ApXoWvfEYVU";
   console.log("storeagevideoid = ", storedVideoId);
   // if (storedVideoId) {
-    // Call your API with the retrieved video ID
-     let videoId = "ApXoWvfEYVU";
-    if (YT) {
-      new YT.Player("video-player", {
-        height: "100%",
-        width: "100%",
-          videoId:storedVideoId,
-        events: {
-          onReady: onPlayerReady,
-        },
-      });
-    }
-     // Fetch video details when the player is ready
-   fetchVideoDetails(storedVideoId);
-   // Fetch comments for the video
-   fetchComments(storedVideoId);
-    // fetchVideoDetails(storedVideoId);
+  // Call your API with the retrieved video ID
+  //  let videoId = "ApXoWvfEYVU";
+  if (YT) {
+    new YT.Player("video-player", {
+      height: "100%",
+      width: "100%",
+      videoId: storedVideoId,
+      events: {
+        onReady: onPlayerReady,
+      },
+    });
+  }
+  // Fetch video details when the player is ready
+  fetchVideoDetails(storedVideoId);
+  // Fetch comments for the video
+  fetchComments(storedVideoId);
+  // fetchVideoDetails(storedVideoId);
   // } else {
   //   console.error("No video ID found in local storage");
   // }
 
-
-  
   // if (YT) {
   //   new YT.Player("video-player", {
   //     height: "50%",
@@ -87,7 +84,7 @@ window.addEventListener("load", () => {
       // console.log(channelId);
       let channelurl = await fetchChannelLogo(channelId);
 
-        // console.log(channelurl);
+      // console.log(channelurl);
 
       let videoCard = document.createElement("div");
       videoCard.className = "video";
@@ -160,14 +157,7 @@ window.addEventListener("load", () => {
     }
   }
 
-
-
-
-
-
-  fetchVideo("",10);
-
-
+  fetchVideo("", 10);
 
   //
   async function fetchVideoDetails(videoId) {
@@ -178,24 +168,25 @@ window.addEventListener("load", () => {
       const data = await response.json();
       const videoDetails = data.items[0].snippet;
       const vd = data.items[0];
-      
+
       // Update video details on the page
-      document.querySelector('.video-title').textContent = videoDetails.title;
-      document.querySelector('.like-count').textContent = vd.likeCount;
-      document.querySelector('.share-count').textContent = vd.shareCount;
-      document.querySelector('.video-description').textContent = videoDetails.description;
+      document.querySelector(".video-title").textContent = videoDetails.title;
+      document.querySelector(".like-count").textContent = vd.likeCount;
+      document.querySelector(".share-count").textContent = vd.shareCount;
+      document.querySelector(".video-description").textContent =
+        videoDetails.description;
     } catch (err) {
       console.error("Error fetching video details:", err);
     }
   }
-  
+
   async function fetchComments(videoId) {
     try {
       const response = await fetch(
         `${BASE_URL}/commentThreads?key=${API_KEY}&videoId=${videoId}&maxResults=10&part=snippet`
       );
       const data = await response.json();
-      
+
       // Update the comments on the page
       console.log(data);
       renderComments(data.items);
@@ -203,11 +194,11 @@ window.addEventListener("load", () => {
       console.error("Error fetching comments:", err);
     }
   }
-  
+
   function renderComments(comments) {
-    const commentsList = document.querySelector('.comments-list');
-    comments.forEach(comment => {
-      const commentItem = document.createElement('li');
+    const commentsList = document.querySelector(".comments-list");
+    comments.forEach((comment) => {
+      const commentItem = document.createElement("li");
       commentItem.innerHTML = `
         <div class="comment-details">
           <span class="comment-author">${comment.snippet.topLevelComment.snippet.authorDisplayName}</span>
@@ -219,11 +210,6 @@ window.addEventListener("load", () => {
       commentsList.appendChild(commentItem);
     });
   }
-  
- 
-
-  
-
 });
 async function fetchReplies(parentCommentId) {
   try {
@@ -231,9 +217,9 @@ async function fetchReplies(parentCommentId) {
       `${BASE_URL}/comments?key=${API_KEY}&parentId=${parentCommentId}&maxResults=5&part=snippet`
     );
     const data = await response.json();
-    
+
     // Update and display the replies on the page
-    console.log("fetch replies fucntion" , data);
+    console.log("fetch replies fucntion", data);
 
     renderReplies(parentCommentId, data.items);
   } catch (err) {
@@ -242,8 +228,8 @@ async function fetchReplies(parentCommentId) {
 }
 function renderReplies(parentCommentId, replies) {
   const repliesList = document.getElementById(`replies-${parentCommentId}`);
-  replies.forEach(reply => {
-    const replyItem = document.createElement('li');
+  replies.forEach((reply) => {
+    const replyItem = document.createElement("li");
     replyItem.innerHTML = `
       <div class="reply-details">
         <span class="reply-author">${reply.snippet.authorDisplayName}</span>

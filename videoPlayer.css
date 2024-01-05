@@ -5,87 +5,97 @@
   box-sizing: border-box;
   font-family: "Poppins", sans-serif;
   scroll-behavior: smooth;
- 
 }
-*::-webkit-scrollbar { 
-    display: none;  /* Safari and Chrome */
+header {
+  z-index: 100;
 }
-
-#video-player{
-    margin-top: 11px;
-    height: 473px;
-
-
-}
-.wrapper{
-    background-color: black;
-    height: auto  !important ;
-}
-.sideRecom{
-    display: grid;
-    
-   width: 314px;
-   margin-top: 15px;
-   margin-left: 15px;
-   row-gap: 20px;
-   overflow: scroll;
+*::-webkit-scrollbar {
+  display: none; /* Safari and Chrome */
 }
 
+#video-player {
+  margin-top: 11px;
+  height: 473px;
+}
+.wrapper {
+  background-color: black;
+  height: auto !important ;
+}
+.sideRecom {
+  display: grid;
 
-  .video {
-    position: relative;
-    transition: 0.2s;
-    transition-delay: 0.2s;
-    height: 200px;
-    background-color: #131213;
-    border: 2px solid #131213;
-    border-radius: 10px;
-    overflow: hidden;
-    /* background: #131213; */
-  }
-  
-  .vid{
+  width: 314px;
+  margin-top: 40px;
+  margin-left: 15px;
+  row-gap: 20px;
+  overflow: scroll;
+}
 
-    width: 50%;
-    height: 60%;
-    color: white;
-    margin-top: 20px;
-  }
-  .det{
-    row-gap: 27px;
-    flex-direction: column;
-    display: flex;
-    background-color: #131213;
-    margin-left: 26px;
-  }
-  .video-details-container{
-    display: flex;
-    flex-direction: column;
-  }
-  .video-like-share{
-    display: flex;
-    column-gap: 20px;
-  }
-  .comments-container{
-    display: flex;
-    flex-direction: column;
-    row-gap: 15px;
-  }
-  .comments-list{
-    row-gap: 28px;
-    display: flex;
-    flex-direction: column;
-  }
-  .replies-list{
-    margin-left: 79px;
-  }
-  .show-replies-btn{
-    background: transparent;
-    color: white;
+.video {
+  position: relative;
+  transition: 0.2s;
+  transition-delay: 0.2s;
+  height: 200px;
+  background-color: #131213;
+  border: 2px solid #131213;
+  border-radius: 10px;
+  overflow: hidden;
+  /* background: #131213; */
+}
 
-  }
-.video-description{
+.vid {
+  width: 50%;
+  height: 60%;
+  color: white;
+  margin-top: 20px;
+}
+.det {
+  row-gap: 27px;
+  flex-direction: column;
+  display: flex;
+  background-color: #131213;
+  margin-left: 26px;
+}
+.video-details-container {
+  display: flex;
+  flex-direction: column;
+}
+.video-like-share {
+  display: flex;
+  column-gap: 20px;
+}
+.comments-container {
+  display: flex;
+  flex-direction: column;
+  row-gap: 15px;
+}
+.comments-list {
+  row-gap: 28px;
+  display: flex;
+  flex-direction: column;
+}
+.replies-list {
+  margin-left: 79px;
+}
+.show-replies-btn {
+  background: transparent;
+  color: white;
+}
+.video-description {
   height: 300px;
   overflow: scroll;
   margin-top: 20px;
+}
+@media screen and (max-width: 600px) {
+  .wrapper {
+    display: flex;
+    flex-direction: column;
+  }
+  .vid {
+    width: 100%;
+  }
+  .sideRecom {
+    width: 100%;
+    margin: 20px 20px;
+  }
 }

@@ -23,10 +23,10 @@ async function fetchVideo(searchQuery, maxResults) {
         `?key=${API_KEY}` +
         "&part=snippet" +
         `&q=${searchQuery}` +
-        `&maxResults=${maxResults}`+
-        "&type=video"+
-        "&chart=mostPopular"+
-        "$videoEmbeddable=true"        
+        `&maxResults=${maxResults}` +
+        "&type=video" +
+        "&chart=mostPopular" +
+        "$videoEmbeddable=true"
     ); // this will give response object
     // snippet give additional information about vide like channel detail i.e its channelID , channel titile etc.
     const data = await response.json();
@@ -70,7 +70,7 @@ async function renderVideo(items) {
     videoCard.addEventListener("click", () => {
       //retrieving video id from video item
       let videoId = video.id.videoId;
-      console.log("video id= ",videoId);
+      console.log("video id= ", videoId);
       //storing vide id in localStroage
       localStorage.setItem("selectedVideoId", videoId);
 
@@ -135,7 +135,7 @@ async function getComments(videoIdId) {
 }
 // getComments("358ZZYTnlV4");
 
-// fetchVideo("", 30);
+fetchVideo("", 30);
 // fetchVideoStats("ng438SIXyW4",STATS);
 // fetchChannelLogo("UCJrpiw6dS09Zx2Z8d9AFWDA");
 //search query
