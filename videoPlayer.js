@@ -16,15 +16,14 @@ const STATS = "statistics"; // give live , no of comment , views count of video
 
 window.addEventListener("load", () => {
   const sideRec = document.querySelector(".sideRecom");
+
   // here we have to render my video logic
 
   // Retrieve the video ID from local storage
   let storedVideoId = localStorage.getItem("selectedVideoId");
-  //  storedVideoId  = "ApXoWvfEYVU";
+
   console.log("storeagevideoid = ", storedVideoId);
-  // if (storedVideoId) {
-  // Call your API with the retrieved video ID
-  //  let videoId = "ApXoWvfEYVU";
+  
   if (YT) {
     new YT.Player("video-player", {
       height: "100%",
@@ -37,23 +36,10 @@ window.addEventListener("load", () => {
   }
   // Fetch video details when the player is ready
   fetchVideoDetails(storedVideoId);
+  
   // Fetch comments for the video
   fetchComments(storedVideoId);
-  // fetchVideoDetails(storedVideoId);
-  // } else {
-  //   console.error("No video ID found in local storage");
-  // }
-
-  // if (YT) {
-  //   new YT.Player("video-player", {
-  //     height: "50%",
-  //     width: "60%",
-  //     storedVideoId,
-  //     events: {
-  //       onReady: onPlayerReady,
-  //     },
-  //   });
-  // }
+  
 
   async function fetchVideo(searchQuery, maxResults) {
     try {

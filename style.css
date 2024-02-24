@@ -6,6 +6,12 @@
   font-family: "Poppins", sans-serif;
   scroll-behavior: smooth;
 }
+:root {
+  --black: #0e0e0f;
+  --white: #ffffff;
+}
+
+
 *::-webkit-scrollbar {
   display: none; /* Safari and Chrome */
 }
@@ -22,7 +28,7 @@ header {
   display: flex;
   align-items: center;
   justify-content: space-between;
-  background-color: #0e0e0f;
+  background-color: var(--black);
   padding: 5px 25px;
 }
 .col-1,
@@ -55,7 +61,7 @@ input {
   color: white;
   border: 1px solid #303131;
   outline: none;
-  background-color: #131213;
+  background-color:  var(--black);
   height: 35px;
   border-radius: 17px 0px 0px 17px;
 }
@@ -77,7 +83,7 @@ input {
 .sidebar {
   width: 240px;
   overflow-y: scroll;
-  background-color: #0e0e0f;
+  background-color:  var(--black);
   color: white;
 }
 .list1 {
@@ -99,7 +105,7 @@ hr {
 }
 .content {
   width: calc((100vw) - 240px);
-  background-color: black;
+  background-color:  var(--black);
   overflow-y: scroll;
 }
 .tag-line {
