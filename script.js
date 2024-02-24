@@ -86,7 +86,16 @@ async function renderVideo(items) {
       localStorage.setItem("selectedVideoId", videoId);
 
       //redirecting to video player html page
-      window.location.href = "http://127.0.0.1:5500/videoPlayer.html";
+      // window.location.href = "http://127.0.0.1:5500/videoPlayer.html";
+      
+      // Get the current domain (e.g., https://ojas-pratap-singh.github.io)
+      var domain = window.location.origin;
+
+      // Construct the URL for the video player HTML page
+      var videoPlayerUrl = domain + "/youtube-clone/videoPlayer.html";
+
+      // Redirecting to video player html page
+      window.location.href = videoPlayerUrl;
     });
 
     videoContainer.append(videoCard);
